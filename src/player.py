@@ -2,9 +2,9 @@
 # currently.
 
 class Player:
-    def __init__(self, currentRoom = 'outside'):
+    def __init__(self, currentRoom, isPlaying = True):
         self.currentRoom = currentRoom
+        self.isPlaying = isPlaying
+        
 
-testPlayer = Player()
 
-print(testPlayer.currentRoom)

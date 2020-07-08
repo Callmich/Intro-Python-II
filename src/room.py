@@ -12,7 +12,7 @@ class Room:
         self.w_to = None
     
     def __str__(self):
-        return(F'You find yourself in the{self.name}. {self.flavor}')
+        return(F'You find yourself in the {self.name}.\n{self.flavor}\nWhich direction shall you travel?')
 
 
 

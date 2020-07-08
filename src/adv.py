@@ -65,10 +65,9 @@ room['treasure'].s_to = room['narrow']
 # print()
 
 # Gameplay Loop
-character = Player()
-mapSpace = character.currentRoom
+character = Player(room['outside'])
 
-print(mapSpace)
+print(character.currentRoom)
 
 
 # while character.isPlaying == True:

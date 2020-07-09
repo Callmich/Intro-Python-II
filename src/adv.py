@@ -1,11 +1,11 @@
-from room import Room
+from room import Room, Items
 from player import Player
 
 
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
+    'outside':  Room("shadow of the Cave Entrance", "North of you, the cave mount beckons.", "canteen", "sword"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east."""),
 
@@ -19,14 +19,14 @@ room = {
 
 # Link rooms together
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+room['outside'].N_to = room['foyer']
+room['foyer'].S_to = room['outside']
+room['foyer'].N_to = room['overlook']
+room['foyer'].E_to = room['narrow']
+room['overlook'].S_to = room['foyer']
+room['narrow'].W_to = room['foyer']
+room['narrow'].N_to = room['treasure']
+room['treasure'].S_to = room['narrow']
 
 #
 # Main
@@ -53,12 +53,12 @@ print()
 print(character.currentRoom)
 # Gameplay Loop
 while character.isPlaying == True:
-    adventure = input("\nPlease Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").lower()
-    if adventure == "q":
+    adventure = input("\nPlease Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").upper()
+    if adventure == "Q":
         print()
         print("See you next Time!")
         character.isPlaying = False
-    elif adventure in ["n", "s", "e", "w"]:
+    elif adventure in ["N", "S", "E", "W"]:
         print()
         character.move(adventure)
     else:

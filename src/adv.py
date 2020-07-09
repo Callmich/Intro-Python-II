@@ -58,8 +58,8 @@ for f in key:
     if room[f.location] == character.currentRoom:
         print(f)
 for f in key:
-        if room[f.location] == character.currentRoom:
-            character.currentRoom.items.add(f)
+        if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
+            character.currentRoom.items.append(f)
 # print(key[0].location)
 
 # cRoom = Room(character.currentRoom)
@@ -94,7 +94,7 @@ while character.isPlaying == True:
         else:
             print("I did not understand")
     for f in key:
-        if room[f.location] == character.currentRoom:
-            character.currentRoom.items.add(f)
+        if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
+            character.currentRoom.items.append(f)
     
     

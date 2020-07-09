@@ -7,19 +7,13 @@ from player import Player
 room = {
     'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east."""),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."""),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air."""),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south."""),
 }
 
 
@@ -54,12 +48,21 @@ room['treasure'].s_to = room['narrow']
 
 
 character = Player(room['outside'])
+print()
+print()
 print(character.currentRoom)
 # Gameplay Loop
 while character.isPlaying == True:
-    adventure = input("Please Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n").lower()
+    adventure = input("\nPlease Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").lower()
     if adventure == "q":
         print()
         print("See you next Time!")
         character.isPlaying = False
+    elif adventure in ["n", "s", "e", "w"]:
+        print()
+        character.move(adventure)
+    else:
+        print()
+        print("You must be using a new fangled compass - I don't understand that direction.")
+    
     

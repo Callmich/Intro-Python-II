@@ -57,5 +57,9 @@ character = Player(room['outside'])
 print(character.currentRoom)
 # Gameplay Loop
 while character.isPlaying == True:
-    adventure = input("Please Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n")
+    adventure = input("Please Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n").lower()
+    if adventure == "q":
+        print()
+        print("See you next Time!")
+        character.isPlaying = False
     

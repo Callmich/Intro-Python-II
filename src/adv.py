@@ -3,8 +3,10 @@ from player import Player
 from item import Items
 
 collectables = {
-    "sword": Items("SWORD", "A very good Sword", "outside"),
-    "coins": Items("COINS", "$$$", "foyer")
+    "SWORD": Items("SWORD", "A very good Sword", "outside"),
+    "HANDAXE": Items("HANDAXE", "It is Sharp", "outside"),
+    "COINS": Items("COINS", "$$$", "foyer"),
+    "KEY": Items("KEY", "A key for something", "overlook")
 }
 
 # Declare all the rooms
@@ -19,6 +21,8 @@ room = {
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south."""),
+
+    "player": None
 }
 
 
@@ -54,23 +58,27 @@ room['treasure'].S_to = room['narrow']
 
 character = Player(room['outside'])
 key = [collectables[obj] for obj in collectables]
-for f in key:
-    if room[f.location] == character.currentRoom:
-        print(f)
+# for f in key:
+#     if room[f.location] == character.currentRoom:
+#         print(f)
 for f in key:
         if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
             character.currentRoom.items.append(f)
+
+def open_inventory():
+    print('inventory: ')
+    character.open_inventory()
 # print(key[0].location)
 
 # cRoom = Room(character.currentRoom)
 print()
 print()
 # x
-print(character.currentRoom)
 
 # Gameplay Loop
 while character.isPlaying == True:
-    adventure = input("\nPlease Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").upper()
+    print(character.currentRoom)
+    adventure = input("\nPlease Enter: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").upper()
     args = len(adventure)
     if args == 1:
         if adventure == "Q":
@@ -80,21 +88,37 @@ while character.isPlaying == True:
         elif adventure in ["N", "S", "E", "W"]:
             print()
             character.move(adventure)
-            # print()
-            # print()
-            # print(cRoom)
+            print()
+            for f in key:
+                if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
+                    character.currentRoom.items.append(f)
+                else:
+                    pass
+        elif adventure == "I":
+            open_inventory()
         else:
             print()
-            print("You must be using a new fangled compass - I don't understand that direction.")
+            print("You must be using a new fangled compass - I don't understand that direction.\n")
     else:
         x = str(adventure).split()
+        # print(x)
         if x[0] == "GET":
             y = str(x[1])
-            character.currentRoom.checkItems(y)
+            # character.currentRoom.checkItems(y)
+            # print(y)
+            for f in key:
+                if str(f).startswith(y):
+                    character.items.append(f)
+                    print(collectables)
+                    f.location = 'player'
+                    collectables[y].location = 'player'
+                    character.currentRoom.items.remove(f)
+                    
+                    # print(f.location)
         else:
             print("I did not understand")
-    for f in key:
-        if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
-            character.currentRoom.items.append(f)
+    # for f in key:
+    #     if room[f.location] == character.currentRoom and f not in character.currentRoom.items:
+    #         character.currentRoom.items.append(f)
     
     

@@ -12,6 +12,9 @@ class Player:
             print(F"You Can't Go {compass}. There is a goat in the way.")
         else:
             self.currentRoom = travelTo
-            print(self.currentRoom)
+            # print(self.currentRoom)
+    def open_inventory(self):
+        for i in self.items:
+            print(i)
 
 

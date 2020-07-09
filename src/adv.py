@@ -1,11 +1,16 @@
-from room import Room, Items
+from room import Room
 from player import Player
+from item import Items
 
+collectables = {
+    "sword": Items("SWORD", "A very good Sword", "outside"),
+    "coins": Items("COINS", "$$$", "foyer")
+}
 
 # Declare all the rooms
 
 room = {
-    'outside':  Room("shadow of the Cave Entrance", "North of you, the cave mount beckons.", "canteen", "sword"),
+    'outside':  Room("shadow of the Cave Entrance", "North of you, the cave mount beckons."),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east."""),
 
@@ -48,21 +53,48 @@ room['treasure'].S_to = room['narrow']
 
 
 character = Player(room['outside'])
+key = [collectables[obj] for obj in collectables]
+for f in key:
+    if room[f.location] == character.currentRoom:
+        print(f)
+for f in key:
+        if room[f.location] == character.currentRoom:
+            character.currentRoom.items.add(f)
+# print(key[0].location)
+
+# cRoom = Room(character.currentRoom)
 print()
 print()
+# x
 print(character.currentRoom)
+
 # Gameplay Loop
 while character.isPlaying == True:
     adventure = input("\nPlease Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").upper()
-    if adventure == "Q":
-        print()
-        print("See you next Time!")
-        character.isPlaying = False
-    elif adventure in ["N", "S", "E", "W"]:
-        print()
-        character.move(adventure)
+    args = len(adventure)
+    if args == 1:
+        if adventure == "Q":
+            print()
+            print("See you next Time!")
+            character.isPlaying = False
+        elif adventure in ["N", "S", "E", "W"]:
+            print()
+            character.move(adventure)
+            # print()
+            # print()
+            # print(cRoom)
+        else:
+            print()
+            print("You must be using a new fangled compass - I don't understand that direction.")
     else:
-        print()
-        print("You must be using a new fangled compass - I don't understand that direction.")
+        x = str(adventure).split()
+        if x[0] == "GET":
+            y = str(x[1])
+            character.currentRoom.checkItems(y)
+        else:
+            print("I did not understand")
+    for f in key:
+        if room[f.location] == character.currentRoom:
+            character.currentRoom.items.add(f)
     
     

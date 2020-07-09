@@ -51,25 +51,11 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-# def check():
-#     for x in room if str(x) == testPlayer.currentRoom:
-#     print(x)
-
-# check()
-
-# y = [x for x in room if str(x) == character.currentRoom]
-
-# print(y)
 
 
-# print()
-
-# Gameplay Loop
 character = Player(room['outside'])
-
 print(character.currentRoom)
-
-
-# while character.isPlaying == True:
-#     pass
+# Gameplay Loop
+while character.isPlaying == True:
+    adventure = input("Please Press: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n")
     

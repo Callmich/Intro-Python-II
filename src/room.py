@@ -4,9 +4,10 @@ from item import Items
 
 
 class Room:
-    def __init__(self, name, flavor):
+    def __init__(self, name, flavor, title):
         self.name = name
         self.flavor = flavor
+        self.title = title
         self.N_to = None
         self.S_to = None
         self.E_to = None

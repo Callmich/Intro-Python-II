@@ -12,15 +12,15 @@ collectables = {
 # Declare all the rooms
 
 room = {
-    'outside':  Room("shadow of the Cave Entrance", "North of you, the cave mount beckons."),
+    'outside':  Room("shadow of the Cave Entrance", "North of you, the cave mount beckons.", 'outside'),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east."""),
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""", 'foyer'),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."""),
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", 'overlook'),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air."""),
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", 'narrow'),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south."""),
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", 'treasure'),
 
     "player": None
 }
@@ -54,9 +54,11 @@ room['treasure'].S_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
+playerName = input("Please Enter: Your character's name!")
 
-
-character = Player(room['outside'])
+character = Player(playerName, room['outside'])
+print()
+print(F'Welcome {character.name}!')
 key = [collectables[obj] for obj in collectables]
 # for f in key:
 #     if room[f.location] == character.currentRoom:
@@ -109,12 +111,22 @@ while character.isPlaying == True:
             for f in key:
                 if str(f).startswith(y):
                     character.items.append(f)
-                    print(collectables)
                     f.location = 'player'
                     collectables[y].location = 'player'
                     character.currentRoom.items.remove(f)
+                    print(F'You have picked up the {y}')
                     
                     # print(f.location)
+        elif x[0] == "DROP":
+            y = str(x[1])
+            # print(str(character.currentRoom.title))
+            for f in key:
+                if str(f).startswith(y):
+                    character.items.remove(f)
+                    f.location = character.currentRoom.title
+                    collectables[y].location = character.currentRoom.title
+                    character.currentRoom.items.append(f)
+                    print(F'You have dropped the {y}')
         else:
             print("I did not understand")
     # for f in key:

@@ -80,7 +80,7 @@ print()
 # Gameplay Loop
 while character.isPlaying == True:
     print(character.currentRoom)
-    adventure = input("\nPlease Enter: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n or [Q] Quit\n\n ").upper()
+    adventure = input("\nPlease Enter: \n[N] to go North\n[S] to go South\n[E] to go East\n[W] to go West\n[GET ITEM] to pick up an item\n[DROP ITEM] to drop it from your inventory\n[I] to check your inventory\n or [Q] Quit\n\n ").upper()
     args = len(adventure)
     if args == 1:
         if adventure == "Q":
